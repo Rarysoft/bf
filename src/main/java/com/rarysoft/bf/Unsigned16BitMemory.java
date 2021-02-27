@@ -23,39 +23,8 @@
  */
 package com.rarysoft.bf;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class Unsigned16BitMemory implements Memory {
-    private final Map<Integer, Integer> bytes = new HashMap<>();
-
-    @Override
-    public int read(int address) {
-        return bytes.getOrDefault(address, 0);
-    }
-
-    @Override
-    public void write(int address, int value) {
-        bytes.put(address, value);
-    }
-
-    @Override
-    public int minAddress() {
-        return 0x0000;
-    }
-
-    @Override
-    public int maxAddress() {
-        return 0x752F;
-    }
-
-    @Override
-    public int minValue() {
-        return 0x0000;
-    }
-
-    @Override
-    public int maxValue() {
-        return 0xFFFF;
+public class Unsigned16BitMemory extends HashMapMemory {
+    public Unsigned16BitMemory() {
+        super(0x0000, 0xFFFF, 0x0000, 0xFFFF);
     }
 }

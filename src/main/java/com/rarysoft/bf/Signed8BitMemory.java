@@ -23,8 +23,8 @@
  */
 package com.rarysoft.bf;
 
-public class Unsigned8BitMemory extends HashMapMemory {
-    public Unsigned8BitMemory() {
-        super(0x0000, 0x752F, 0x00, 0xFF);
+public class Signed8BitMemory extends HashMapMemory {
+    public Signed8BitMemory() {
+        super(0x0000, 0x752F, -0x80, 0x7F);
     }
 }
