@@ -48,8 +48,9 @@ public class BFExecutor implements Executor {
     @Override
     public void performIncrement() {
         int current = memory.read(pointer);
-        if (current == Integer.MAX_VALUE) {
-            throw new STB(String.format("Maximum value exceeded at memory address %d", pointer));
+        if (current == memory.maxValue()) {
+            memory.write(pointer, memory.minValue());
+            return;
         }
         memory.write(pointer, current + 1);
     }
@@ -57,24 +58,27 @@ public class BFExecutor implements Executor {
     @Override
     public void performDecrement() {
         int current = memory.read(pointer);
-        if (current == Integer.MIN_VALUE) {
-            throw new STB(String.format("Minimum value exceeded at memory address %d", pointer));
+        if (current == memory.minValue()) {
+            memory.write(pointer, memory.maxValue());
+            return;
         }
         memory.write(pointer, current - 1);
     }
 
     @Override
     public void performIncrementPointer() {
-        if (pointer == Integer.MAX_VALUE) {
-            throw new STB("Maximum address exceeded");
+        if (pointer == memory.maxAddress()) {
+            pointer = memory.minAddress();
+            return;
         }
         pointer ++;
     }
 
     @Override
     public void performDecrementPointer() {
-        if (pointer == 0) {
-            throw new STB("Minimum address exceeded");
+        if (pointer == memory.minAddress()) {
+            pointer = memory.maxAddress();
+            return;
         }
         pointer --;
     }

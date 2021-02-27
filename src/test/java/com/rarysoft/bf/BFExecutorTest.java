@@ -23,7 +23,6 @@
  */
 package com.rarysoft.bf;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,6 +51,10 @@ public class BFExecutorTest {
     @Before
     public void prepareBFExecutor() {
         bfExecutor.setPointer(POINTER);
+        when(memory.minAddress()).thenReturn(0x0000);
+        when(memory.maxAddress()).thenReturn(0xFFFF);
+        when(memory.minValue()).thenReturn(0x0000);
+        when(memory.maxValue()).thenReturn(0XFFFF);
     }
 
     @Test
@@ -64,10 +67,12 @@ public class BFExecutorTest {
     }
 
     @Test
-    public void performIncrementWhenMemoryValueAtMaximumValueThrowsSTB() {
-        when(memory.read(POINTER)).thenReturn(Integer.MAX_VALUE);
+    public void performIncrementWhenMemoryValueAtMaximumValueWrapsToMinimumValue() {
+        when(memory.read(POINTER)).thenReturn(0xFFFF);
 
-        Assert.assertThrows(STB.class, () -> bfExecutor.performIncrement());
+        bfExecutor.performIncrement();
+
+        verify(memory).write(POINTER, 0x0000);
     }
 
     @Test
@@ -80,10 +85,12 @@ public class BFExecutorTest {
     }
 
     @Test
-    public void performDecrementWhenMemoryValueAtMinimumValueThrowsSTB() {
-        when(memory.read(POINTER)).thenReturn(Integer.MIN_VALUE);
+    public void performDecrementWhenMemoryValueAtMinimumValueWrapsToMaximumValue() {
+        when(memory.read(POINTER)).thenReturn(0x0000);
 
-        Assert.assertThrows(STB.class, () -> bfExecutor.performDecrement());
+        bfExecutor.performDecrement();
+
+        verify(memory).write(POINTER, 0xFFFF);
     }
 
     @Test
@@ -94,10 +101,12 @@ public class BFExecutorTest {
     }
 
     @Test
-    public void performIncrementPointerWhenPointerAtEndThrowsSTB() {
-        bfExecutor.setPointer(Integer.MAX_VALUE);
+    public void performIncrementPointerWhenPointerAtMaximumAddressWrapsToMinimumAddress() {
+        bfExecutor.setPointer(0xFFFF);
 
-        Assert.assertThrows(STB.class, () -> bfExecutor.performIncrementPointer());
+        bfExecutor.performIncrementPointer();
+
+        assertThat(bfExecutor.getPointer()).isEqualTo(0x0000);
     }
 
     @Test
@@ -108,10 +117,12 @@ public class BFExecutorTest {
     }
 
     @Test
-    public void performDecrementPointerWhenPointerAtStartThrowsSTB() {
-        bfExecutor.setPointer(0);
+    public void performDecrementPointerWhenPointerAtMinimumAddressWrapsToMaximumAddress() {
+        bfExecutor.setPointer(0x0000);
 
-        Assert.assertThrows(STB.class, () -> bfExecutor.performDecrementPointer());
+        bfExecutor.performDecrementPointer();
+
+        assertThat(bfExecutor.getPointer()).isEqualTo(0xFFFF);
     }
 
     @Test
