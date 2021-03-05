@@ -23,9 +23,9 @@
  */
 package com.rarysoft.bf;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -39,8 +39,12 @@ public class BFTest {
     @Mock
     private Looper looper;
 
-    @InjectMocks
     private BF bf;
+
+    @Before
+    public void initialize() {
+        bf = new BF(executor, looper);
+    }
 
     @Test
     public void runWhenCodeIsNullThrowsSTB() {
