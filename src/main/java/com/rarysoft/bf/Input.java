@@ -23,6 +23,15 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * An interface for an {@link Executor} implementation to read from when it encounters
+ * code that indicates to input a value.
+ */
 public interface Input {
+    /**
+     * Reads from the input.
+     *
+     * @return The value read.
+     */
     int read();
 }

@@ -23,6 +23,15 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * An interface for an {@link Executor} implementation to write to when it encounters
+ * code that indicates to output a value.
+ */
 public interface Output {
+    /**
+     * Writes the provided value to the output.
+     *
+     * @param value The value to write.
+     */
     void write(int value);
 }

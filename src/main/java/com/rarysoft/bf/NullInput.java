@@ -23,6 +23,10 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * A simple {@link Input} implementation that accepts no input from anywhere and simply
+ * returns 0 to any read attempt.
+ */
 public class NullInput implements Input {
     @Override
     public int read() {

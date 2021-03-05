@@ -23,6 +23,13 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * The default implementation of the {@link Looper} interface. This implementation simply scans
+ * forward or backward through the code looking for a matching command, counting nested loops
+ * as it goes.
+ *
+ * @see com.rarysoft.bf.Looper
+ */
 public class BFLooper implements Looper {
     @Override
     public int findEndOfLoopDelta(String code, int position) {

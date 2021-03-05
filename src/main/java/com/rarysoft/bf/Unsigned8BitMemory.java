@@ -23,7 +23,14 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * A concrete implementation of {@link HashMapMemory} with an address range of 30,000
+ * cells and the ability to store unsigned 8-bit values (0 to 255) in the cells.
+ */
 public class Unsigned8BitMemory extends HashMapMemory {
+    /**
+     * Creates an instance.
+     */
     public Unsigned8BitMemory() {
         super(0x0000, 0x752F, 0x00, 0xFF);
     }

@@ -23,6 +23,9 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * A simple {@link Output} implementation that outputs to the system console.
+ */
 public class ConsoleOutput implements Output {
     @Override
     public void write(int value) {

@@ -140,13 +140,13 @@ public class BFTest {
     public void runWhenCodeContainsReadPerformsRead() {
         bf.run(",");
 
-        verify(executor).performRead();
+        verify(executor).performInput();
     }
 
     @Test
     public void runWhenCodeContainsWritePerformsWrite() {
         bf.run(".");
 
-        verify(executor).performWrite();
+        verify(executor).performOutput();
     }
 }

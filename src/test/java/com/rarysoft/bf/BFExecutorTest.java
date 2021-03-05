@@ -58,6 +58,15 @@ public class BFExecutorTest {
     }
 
     @Test
+    public void constructorInitializesPointerToMemoryMinAddress() {
+        when(memory.minAddress()).thenReturn(3);
+
+        BFExecutor bfExecutor = new BFExecutor(input, output, memory);
+
+        assertThat(bfExecutor.getPointer()).isEqualTo(3);
+    }
+
+    @Test
     public void performIncrementIncrementsMemoryValueAtPointer() {
         when(memory.read(POINTER)).thenReturn(101);
 
@@ -219,7 +228,7 @@ public class BFExecutorTest {
     public void performReadAlwaysReadsFromInputAndWritesToMemoryAtPointer() {
         when(input.read()).thenReturn(101);
 
-        bfExecutor.performRead();
+        bfExecutor.performInput();
 
         verify(memory).write(POINTER, 101);
     }
@@ -228,7 +237,7 @@ public class BFExecutorTest {
     public void performWriteAlwaysWritesToOutputFromMemoryAtPointer() {
         when(memory.read(POINTER)).thenReturn(101);
 
-        bfExecutor.performWrite();
+        bfExecutor.performOutput();
 
         verify(output).write(101);
     }

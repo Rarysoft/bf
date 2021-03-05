@@ -23,6 +23,12 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * Executes the eight brainfuck commands using provided implementations of {@link Input},
+ * {@link Output}, and {@link Memory}.
+ *
+ * @see com.rarysoft.bf.Executor
+ */
 public class BFExecutor implements Executor {
     private final Input input;
     private final Output output;
@@ -30,17 +36,41 @@ public class BFExecutor implements Executor {
 
     private int pointer;
 
+    /**
+     * Creates an instance of the executor using the provided {@link Input}, {@link Output},
+     * and {@link Memory} implementations.
+     *
+     * @param input The {@link Input} implementation to use.
+     * @param output The {@link Output} implementation to use.
+     * @param memory The {@link Memory} implementation to use.
+     */
     public BFExecutor(Input input, Output output, Memory memory) {
         this.input = input;
         this.output = output;
         this.memory = memory;
-        this.pointer = 0;
+        this.pointer = memory.minAddress();
     }
 
+    /**
+     * Gets the value of the pointer. This method is not normally used when executing code,
+     * and is not used at all by the {@link BF} interpreter. It can be used for testing or to
+     * otherwise gain insight into the internal workings of the executor.
+     *
+     * @return The value of the pointer.
+     */
     public int getPointer() {
         return pointer;
     }
 
+    /**
+     * Sets the value of the pointer. This method is not normally used when executing code,
+     * and is not used at all by the {@link BF} interpreter. It can be used for testing or to
+     * manipulate the internal workings of the executor. Note that doing so is dangerous, and
+     * may alter the code execution in ways that violate the brainfuck standard, and may result
+     * in an {@link STB} being thrown.
+     *
+     * @param pointer The value to set the pointer to.
+     */
     public void setPointer(int pointer) {
         this.pointer = pointer;
     }
@@ -94,12 +124,12 @@ public class BFExecutor implements Executor {
     }
 
     @Override
-    public void performRead() {
+    public void performInput() {
         memory.write(pointer, input.read());
     }
 
     @Override
-    public void performWrite() {
+    public void performOutput() {
         output.write(memory.read(pointer));
     }
 }

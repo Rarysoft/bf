@@ -23,13 +23,49 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * Defines the brainfuck commands.
+ */
 public class BFDialect {
+    /**
+     * The increment command (<code>+</code>): Increment the memory cell at the pointer.
+     */
     public static final char INCREMENT = '+';
+
+    /**
+     * The decrement command (<code>-</code>): Decrement the memory cell at the pointer.
+     */
     public static final char DECREMENT = '-';
+
+    /**
+     * The increment pointer command (<code>&gt;</code>): Move the pointer to the right.
+     */
     public static final char INCREMENT_POINTER = '>';
+
+    /**
+     * The decrement pointer command (<code>&lt;</code>): Move the pointer to the left.
+     */
     public static final char DECREMENT_POINTER = '<';
+
+    /**
+     * The start loop command (<code>[</code>): Jump past the matching <code>]</code> if the cell
+     * at the pointer is 0.
+     */
     public static final char START_LOOP = '[';
+
+    /**
+     * The end loop command (<code>]</code>): Jump back to the matchin <code>[</code> if the cell
+     * at the pointer is nonzero.
+     */
     public static final char END_LOOP = ']';
+
+    /**
+     * The input command (<code>,</code>): Input a character and store it in the cell at the pointer.
+     */
     public static final char INPUT = ',';
+
+    /**
+     * The output command (<code>.</code>): Output the character signified by the cell at the pointer.
+     */
     public static final char OUTPUT = '.';
 }

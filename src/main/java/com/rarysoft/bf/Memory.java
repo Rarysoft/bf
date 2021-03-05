@@ -23,16 +23,63 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * An interface for an {@link Executor} implementation to use for internal program memory.
+ * This memory stores, in some unspecified internal format, the data values stored in cells
+ * pointed to by the program pointer.
+ */
 public interface Memory {
+    /**
+     * Returns the value stored in the cell at the provided address, or pointer index. The
+     * address must be within the range specified by the <code>minAddress</code> and
+     * <code>maxAddress</code> values. By convention, if an address outside of the valid
+     * range is specified, the implementation should throw an {@link STB}. Also by convention,
+     * addresses not previously initialized should return 0.
+     *
+     * @param address The address to read the cell value from.
+     * @return The value stored at the specified address.
+     */
     int read(int address);
 
+    /**
+     * Stores the specified value in the cell at the provided address, or pointer index. The
+     * address must be within the range specified by the <code>minAddress</code> and
+     * <code>maxAddress</code> values. The value must be within the range specified by the
+     * <code>minValue</code> and <code>maxValue</code> values. </code>By convention, if an
+     * address outside of the valid range is specified, the implementation should throw an
+     * {@link STB}. Also by convention, if a value outside of the valid range is specified,
+     * the implementation should throw an {@link STB}.
+     *
+     * @param address The address to store the value in.
+     * @param value The value to store at the specified address.
+     */
     void write(int address, int value);
 
+    /**
+     * The lowest address value. The program pointer will initially point to this address.
+     *
+     * @return The lowest address value.
+     */
     int minAddress();
 
+    /**
+     * The highest address value.
+     *
+     * @return The highest address value.
+     */
     int maxAddress();
 
+    /**
+     * The lowest value that can be stored in a memory cell.
+     *
+     * @return The lowest value that can be stored in a memory cell.
+     */
     int minValue();
 
+    /**
+     * The highest value that can be stored in a memory cell.
+     *
+     * @return The highest value that can be stored in a memory cell.
+     */
     int maxValue();
 }

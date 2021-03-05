@@ -26,6 +26,11 @@ package com.rarysoft.bf;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A simple abstract {@link Memory} implementation that stores any values written to memory in a
+ * <code>HashMap</code>, and simply returns an automatic 0 value when an address not found in the
+ * <code>HashMap</code> is read from.
+ */
 public abstract class HashMapMemory implements Memory {
     private final int minAddress;
     private final int maxAddress;
@@ -34,6 +39,14 @@ public abstract class HashMapMemory implements Memory {
 
     private final Map<Integer, Integer> bytes = new HashMap<>();
 
+    /**
+     * Creates an instance with a given address range and value range.
+     *
+     * @param minAddress The lowest address value.
+     * @param maxAddress The highest address value.
+     * @param minValue The lowest memory cell value.
+     * @param maxValue The highest memory cell value.
+     */
     protected HashMapMemory(int minAddress, int maxAddress, int minValue, int maxValue) {
         this.minAddress = minAddress;
         this.maxAddress = maxAddress;

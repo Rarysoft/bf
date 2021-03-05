@@ -23,20 +23,47 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * Executes the eight brainfuck commands.
+ */
 public interface Executor {
+    /**
+     * Preforms the increment operation.
+     */
     void performIncrement();
 
+    /**
+     * Preforms the decrement operation.
+     */
     void performDecrement();
 
+    /**
+     * Preforms the increment pointer operation.
+     */
     void performIncrementPointer();
 
+    /**
+     * Preforms the decrement pointer operation.
+     */
     void performDecrementPointer();
 
+    /**
+     * Preforms the start loop operation.
+     */
     boolean performStartLoop();
 
+    /**
+     * Preforms the end loop operation.
+     */
     boolean performEndLoop();
 
-    void performRead();
+    /**
+     * Preforms the input operation.
+     */
+    void performInput();
 
-    void performWrite();
+    /**
+     * Preforms the output operation.
+     */
+    void performOutput();
 }

@@ -23,15 +23,52 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * This is the core of the BF library, the brainfuck interpreter class. This is the class to
+ * instantiate in order to execute brainfuck code. It requires an implementation of the {@link Executor}
+ * interface and an implementation of {@link Looper}, but the default implementations ({@link BFExecutor}
+ * and {@link BFLooper}) will be instantiated and used if the {@link BFExecutor}'s dependencies are
+ * provided instead. These dependencies are implementations of {@link Input}, {@link Output}, and
+ * {@link Memory}.
+ */
 public class BF {
     private final Executor executor;
     private final Looper looper;
 
+    /**
+     * Creates an instance of the interpreter that uses the provided {@link Executor} and {@link Looper}
+     * implementations.
+     *
+     * @param executor The {@link Executor} to use.
+     * @param looper The {@link Looper} to use.
+     */
     public BF(Executor executor, Looper looper) {
         this.executor = executor;
         this.looper = looper;
     }
 
+    /**
+     * Creates an instance of the interpreter that uses a {@link BFExecutor} and a {@link BFLooper}. The
+     * {@link BFExecutor} instance will use the provided {@link Input}, {@link Output}, and {@link Memory}
+     * implementations.
+     *
+     * @param input The {@link Input} implementation for the {@link BFExecutor} to use.
+     * @param output The {@link Output} implementation for the {@link BFExecutor} to use.
+     * @param memory The {@link Memory} implementation for the {@link BFExecutor} to use.
+     */
+    public BF(Input input, Output output, Memory memory) {
+        this(new BFExecutor(input, output, memory), new BFLooper());
+    }
+
+    /**
+     * Runs a brainfuck program. If any coding errors are encountered while executing the code, an
+     * {@link STB} will be thrown. As long as a non-null <code>String</code> is provided, this
+     * method will attempt to execute the code, whether or not any actual brainfuck code is found.
+     * An {@link STB} will only be thrown if invalid brainfuck code is found, such as incorrect
+     * matching of <code>[</code> and <code>]</code> commands.
+     *
+     * @param code The brainfuck code to execute.
+     */
     public void run(String code) {
         if (code == null) {
             throw new STB("Code is missing");
@@ -73,10 +110,10 @@ public class BF {
                 }
                 break;
             case BFDialect.INPUT:
-                executor.performRead();
+                executor.performInput();
                 break;
             case BFDialect.OUTPUT:
-                executor.performWrite();
+                executor.performOutput();
                 break;
             default:
                 break;

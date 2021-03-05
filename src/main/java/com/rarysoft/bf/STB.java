@@ -23,7 +23,16 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * This is the primary system exception, which is to be thrown whenever an unrecoverable
+ * error situation is encountered.
+ */
 public class STB extends RuntimeException {
+    /**
+     * Creates an instance with the provided informational message.
+     *
+     * @param message The explanation of the error that occurred.
+     */
     public STB(String message) {
         super(message);
     }

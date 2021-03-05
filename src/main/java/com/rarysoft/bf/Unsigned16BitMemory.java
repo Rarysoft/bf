@@ -23,7 +23,14 @@
  */
 package com.rarysoft.bf;
 
+/**
+ * A concrete implementation of {@link HashMapMemory} with an address range of 65,536
+ * cells and the ability to store unsigned 16-bit values (0 to 65,535) in the cells.
+ */
 public class Unsigned16BitMemory extends HashMapMemory {
+    /**
+     * Creates an instance.
+     */
     public Unsigned16BitMemory() {
         super(0x0000, 0xFFFF, 0x0000, 0xFFFF);
     }
