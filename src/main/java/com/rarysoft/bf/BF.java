@@ -36,6 +36,15 @@ public class BF {
     private final Looper looper;
 
     /**
+     * Creates an instance of the interpreter that uses a {@link BFExecutor} and a {@link BFLooper}. The
+     * {@link BFExecutor} instance will use the {@link NullInput}, {@link ConsoleOutput}, and
+     * {@link Unsigned8BitMemory} implementations.
+     */
+    public BF() {
+        this(new NullInput(), new ConsoleOutput(), new Unsigned8BitMemory());
+    }
+
+    /**
      * Creates an instance of the interpreter that uses the provided {@link Executor} and {@link Looper}
      * implementations.
      *

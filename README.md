@@ -9,10 +9,18 @@ An instance of `BF` requires an `Executor` and a `Looper`. The standard implemen
 `BFLooper` classes. To instantiate a `BFExecutor`, implementations of the `Input`, `Output`, and `Memory` interfaces
 are required.
 
-The only provided `Input` implementation is the `NullInput`, which immediately returns a `null` input (`0x00`) whenever
-input is read.
+### Input
 
-The only provided `Output` implementation is `ConsoleOutput`, which prints directly to the system console.
+Three `Input` implementations are provided. First is the `NullInput`, which immediately returns a `null` input (`0x00`)
+whenever input is read. Next is `FileInput`, which reads from a file. Also included is `Pipe`, which is both an
+`Input` implementation and an `Output` implementation. It pipes the output from one program into the input of another.
+
+### Output
+
+Three `Output` implementation are provided. First is `ConsoleOutput`, which prints directly to the system console.
+Next is `FileOutput`, which writes to a file. Also included is `Pipe`, described previously.
+
+### Memory
 
 There are two provided abstract base `Memory` classes for extension, and two concrete implementations of those base
 classes. The concrete implementations are `Unsigned8BitMemory`, `Unsigned16BitMemory`, `Signed8BitMemory`, and
@@ -30,6 +38,8 @@ addresses and values to always be within the range of signed 32-bit integers (-2
 therefore impossible to create a `Memory` implementation that goes beyond that range, such as an unsigned 32-bit integer
 memory implementation or any kind of floating-point memory. This is an intentional limitation. This is brainfuck after
 all. It's not meant to be practical.
+
+### Example
 
 Most users of the `BFExecutor` will use one of the `HashMapMemory` implementations and provide their own `Input` and
 `Output` implementations. Non-interactive programs can use the `NullInput` implementation, and simply provide an
