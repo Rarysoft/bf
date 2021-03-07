@@ -11,14 +11,16 @@ are required.
 
 ### Input
 
-Three `Input` implementations are provided. First is the `NullInput`, which immediately returns a `null` input (`0x00`)
-whenever input is read. Next is `FileInput`, which reads from a file. Also included is `Pipe`, which is both an
-`Input` implementation and an `Output` implementation. It pipes the output from one program into the input of another.
+Four `Input` implementations are provided. First is the `NullInput`, which immediately returns a `null` input (`0x00`)
+whenever input is read. Next is `StringInput`, which reads from a provided `String`. Then is `FileInput`, which reads
+from a file. Also included is `Pipe`, which is both an `Input` implementation and an `Output` implementation. It pipes
+the output from one program into the input of another.
 
 ### Output
 
-Three `Output` implementation are provided. First is `ConsoleOutput`, which prints directly to the system console.
-Next is `FileOutput`, which writes to a file. Also included is `Pipe`, described previously.
+Four `Output` implementation are provided. First is `NullOutput`, which does nothing with the output. Next is
+`ConsoleOutput`, which prints directly to the system console. Then is `FileOutput`, which writes to a file. Also
+included is `Pipe`, described previously.
 
 ### Memory
 
