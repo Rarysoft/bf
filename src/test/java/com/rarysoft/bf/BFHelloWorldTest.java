@@ -42,7 +42,7 @@ public class BFHelloWorldTest {
 
     @Test
     public void runHelloWorld() {
-        Executor executor = new BFExecutor(new NullInput(), output, new Unsigned8BitMemory());
+        Executor executor = new BFExecutor(new NullInput(), output, new Unsigned8BitMemory(), 0);
         Looper looper = new BFLooper();
         BF bf = new BF(executor, looper);
 

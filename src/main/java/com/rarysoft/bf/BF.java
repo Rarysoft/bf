@@ -66,7 +66,7 @@ public class BF {
      * @param memory The {@link Memory} implementation for the {@link BFExecutor} to use.
      */
     public BF(Input input, Output output, Memory memory) {
-        this(new BFExecutor(input, output, memory), new BFLooper());
+        this(new BFExecutor(input, output, memory, memory.minAddress()), new BFLooper());
     }
 
     /**

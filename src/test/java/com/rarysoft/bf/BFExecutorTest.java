@@ -26,7 +26,6 @@ package com.rarysoft.bf;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -43,14 +42,13 @@ public class BFExecutorTest {
     @Mock
     private Memory memory;
 
-    @InjectMocks
     private BFExecutor bfExecutor;
 
     private final int POINTER = 42;
 
     @Before
     public void prepareBFExecutor() {
-        bfExecutor.setPointer(POINTER);
+        bfExecutor = new BFExecutor(input, output, memory, POINTER);
         when(memory.minAddress()).thenReturn(0x0000);
         when(memory.maxAddress()).thenReturn(0xFFFF);
         when(memory.minValue()).thenReturn(0x0000);
@@ -58,10 +56,8 @@ public class BFExecutorTest {
     }
 
     @Test
-    public void constructorInitializesPointerToMemoryMinAddress() {
-        when(memory.minAddress()).thenReturn(3);
-
-        BFExecutor bfExecutor = new BFExecutor(input, output, memory);
+    public void constructorInitializesPointerToSpecifiedValue() {
+        BFExecutor bfExecutor = new BFExecutor(input, output, memory, 3);
 
         assertThat(bfExecutor.getPointer()).isEqualTo(3);
     }

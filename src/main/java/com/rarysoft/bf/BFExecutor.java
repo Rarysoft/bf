@@ -43,12 +43,13 @@ public class BFExecutor implements Executor {
      * @param input The {@link Input} implementation to use.
      * @param output The {@link Output} implementation to use.
      * @param memory The {@link Memory} implementation to use.
+     * @param pointer The initial {@link Memory} pointer value to start at.
      */
-    public BFExecutor(Input input, Output output, Memory memory) {
+    public BFExecutor(Input input, Output output, Memory memory, int pointer) {
         this.input = input;
         this.output = output;
         this.memory = memory;
-        this.pointer = memory.minAddress();
+        this.pointer = pointer;
     }
 
     /**
